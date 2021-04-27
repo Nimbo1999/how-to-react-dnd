@@ -1,12 +1,11 @@
-import Button from './components/button';
+import Header from './components/header';
+import { Container } from './styled.app';
 
 function App() {
   return (
-    <div className="App">
-      <Button>
-        Cancelar
-      </Button>
-    </div>
+    <Container>
+      <Header />
+    </Container>
   );
 }
 

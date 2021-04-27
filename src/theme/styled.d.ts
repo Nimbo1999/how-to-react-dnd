@@ -12,10 +12,12 @@ declare module 'styled-components' {
             ui: {
                 primary: string;
                 background: string;
+                strongGray: string;
                 green: string;
                 orange: string;
                 red: string;
                 strongBlue: string;
+                light: string;
             },
         }
 

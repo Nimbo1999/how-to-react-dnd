@@ -13,10 +13,12 @@ const theme: DefaultTheme = {
         ui: {
             primary: '#2D9CDB',
             background: '#E0E0E0',
+            strongGray: '#BDBDBD',
             green: '#27AE60',
             orange: '#F2994A',
             red: '#EB5757',
-            strongBlue: '#2F80ED'
+            strongBlue: '#2F80ED',
+            light: '#E0E0E0',
         },
     },
 

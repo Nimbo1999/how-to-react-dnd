@@ -1,13 +1,32 @@
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
-    type?: string;
-}
+import { ButtonContainerProps } from './button.props';
 
-const Container = styled.button<ContainerProps>`
+const buttonPrimaryType = css`
+    background-color: ${({theme}) => theme.pallet.ui.primary};
+    color: ${({theme}) => theme.pallet.ui.light};
+
+    &:hover {
+        background-color: ${({theme}) => theme.pallet.ui.primary};
+        color: ${({theme}) => theme.pallet.ui.light};
+    }
+`;
+
+const buttonDangerType = css`
+    background-color: ${({theme}) => theme.pallet.ui.red};
+    color: ${({theme}) => theme.pallet.ui.light};
+
+    &:hover {
+        background-color: ${({theme}) => theme.pallet.ui.red};
+        color: ${({theme}) => theme.pallet.ui.light};
+    }
+`;
+
+const ButtonContainer = styled.button<ButtonContainerProps>`
     border: none;
     outline: none;
     border-radius: 4px;
+    background-color: ${({theme}) => theme.pallet.ui.background};
 
     display: flex;
     align-items: center;
@@ -15,13 +34,38 @@ const Container = styled.button<ContainerProps>`
 
     font-family: 'Roboto',sans-serif;
     font-size: 1rem;
-    color: ${({theme}) => theme.pallet.text.text};
     font-weight: 500;
+    color: ${({theme}) => theme.pallet.text.text};
 
     padding: ${({theme}) => theme.spacing(1)} ${({theme}) => theme.spacing(2)};
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 
+    transition: all 250ms ease;
+
+    &:hover {
+        background-color: ${({theme}) => theme.pallet.ui.strongGray};
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);
+        color: ${({theme}) => theme.pallet.text.title};
+    }
+
+    &:active {
+        box-shadow: none;
+        opacity: 0.8;
+    }
+
     // TODO: Criar os estilos para o botão primario e danger.
+    ${({ btnType = 'default' }) => {
+        switch (btnType) {
+            case 'primary':
+                return buttonPrimaryType;
+
+            case 'danger':
+                return buttonDangerType;
+        
+            default:
+                return;
+        }
+    }}
 `;
 
-export { Container };
+export { ButtonContainer };

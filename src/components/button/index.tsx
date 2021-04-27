@@ -1,16 +1,11 @@
-import { HTMLAttributes } from 'react';
+import { ButtonProps } from './button.props';
+import {ButtonContainer} from './styled.button';
 
-import {Container} from './styled.button';
-
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    btnType?: 'danger' | 'primary',
-}
-
-function Button({ btnType = 'primary', children }: ButtonProps) {
+function Button({ btnType = 'default', children }: ButtonProps) {
     return (
-        <Container>
+        <ButtonContainer btnType={ btnType }>
             {children}
-        </Container>
+        </ButtonContainer>
     );
 }
 
