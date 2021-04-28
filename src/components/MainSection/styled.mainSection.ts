@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const MainSectionContainer = styled.section`
+const MainSectionContainer = styled.main`
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -8,7 +8,7 @@ const MainSectionContainer = styled.section`
     width: 100%;
 `;
 
-const SectionWrapper = styled.div`
+const SectionWrapper = styled.section`
     flex: 1;
     display: flex;
     flex-direction: column;
