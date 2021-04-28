@@ -8,9 +8,17 @@ const TodoListContainer = styled.div<TodoListContainerProps>`
     flex-direction: column;
 
     width: 100%;
-    max-width: ${({theme}) => theme.spacing(38)};
+    margin: 0px ${({theme}) => theme.spacing(2)};
     border-radius: ${({theme}) => theme.spacing(.5)};
     border: 1px solid ${({color, theme}) => color ?? theme.pallet.ui.green};
+
+    &:first-child {
+        margin: 0px ${({theme}) => theme.spacing(2)} 0px 0px;
+    }
+
+    &:last-child {
+        margin: 0px 0px 0px ${({theme}) => theme.spacing(2)};
+    }
 
     overflow: hidden;
 `;
