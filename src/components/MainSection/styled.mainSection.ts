@@ -14,12 +14,11 @@ const SectionWrapper = styled.div`
     flex-direction: column;
 
     width: 100%;
-    max-width: 1200px;
-    margin: ${({theme}) => theme.spacing(4)} auto;
+    padding: ${({theme}) => theme.spacing(4)} ${({theme}) => theme.spacing(8)};
 
     hr {
         margin: ${({theme}) => theme.spacing(3)} 0px;
-        border-color: ${({theme}) => theme.pallet.ui.light};
+        border-color: ${({theme}) => theme.pallet.ui.background};
     }
 `;
 

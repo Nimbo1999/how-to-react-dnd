@@ -18,7 +18,8 @@ const theme: DefaultTheme = {
             orange: '#F2994A',
             red: '#EB5757',
             strongBlue: '#2F80ED',
-            light: '#E0E0E0',
+            light: '#F2F2F2',
+            white: '#FBFBFB',
         },
     },
 

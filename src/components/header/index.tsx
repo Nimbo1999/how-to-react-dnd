@@ -8,7 +8,7 @@ function Header() {
 
     return (
         <HeaderContainer>
-            <Heading color={theme.pallet.ui.light}>
+            <Heading color={theme.pallet.ui.background}>
                 Header
             </Heading>
 
