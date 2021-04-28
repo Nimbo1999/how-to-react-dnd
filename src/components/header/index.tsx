@@ -9,7 +9,7 @@ function Header() {
     return (
         <HeaderContainer>
             <Heading color={theme.pallet.ui.background}>
-                Simple exemple of how to use react dnd
+                Simple example of how to use react dnd
             </Heading>
 
             <Avatar />
