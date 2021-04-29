@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
 import { TodoListProps } from '../../components/todo-list/todoList.props';
 import { theme } from '../../theme/theme';
 
-import { setTodo } from './tasks.actions';
+import { createTask } from './tasks.actions';
 
 
 export interface TodoListReducerState {
@@ -45,18 +44,10 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    setTodoAction: setTodo,
+    createTaskAction: createTask,
   },
 });
 
-export const { setTodoAction } = tasksSlice.actions;
-
-export const selectTodo = (state: RootState) => state.tasks.todo;
-
-export const selectDoing = (state: RootState) => state.tasks.doing;
-
-export const selectDone = (state: RootState) => state.tasks.done;
-
-export const selectCanceled = (state: RootState) => state.tasks.canceled;
+export const { createTaskAction } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

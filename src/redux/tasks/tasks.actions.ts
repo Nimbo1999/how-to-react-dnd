@@ -1,5 +1,3 @@
-import {  } from '@reduxjs/toolkit';
-
 import { TodoListReducerState } from './tasks.reducer';
 
 interface ReduxAction {
@@ -7,9 +5,15 @@ interface ReduxAction {
     type: string,
 }
 
-const setTodo = (state: TodoListReducerState, action: ReduxAction) => ({
+const createTask = (state: TodoListReducerState, action: ReduxAction) => ({
     ...state,
-    todo: action.payload
+    todo: {
+        ...state.todo,
+        todos: [
+            ...state.todo.todos!,
+            action.payload
+        ]
+    }
 });
 
-export { setTodo }
+export { createTask }

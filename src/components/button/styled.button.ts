@@ -38,7 +38,7 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
     color: ${({theme}) => theme.pallet.text.text};
 
     padding: ${({theme}) => theme.spacing(1)} ${({theme}) => theme.spacing(2)};
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
 
     transition: all 250ms ease;
 
@@ -53,7 +53,6 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
         opacity: 0.8;
     }
 
-    // TODO: Criar os estilos para o botão primario e danger.
     ${({ btnType = 'default' }) => {
         switch (btnType) {
             case 'primary':
@@ -66,6 +65,11 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
                 return;
         }
     }}
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: .6;
+    }
 `;
 
 export { ButtonContainer };

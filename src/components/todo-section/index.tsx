@@ -1,33 +1,29 @@
-import { useTheme } from 'styled-components';
+import { useAppSelector } from '../../redux/hooks';
+import { selectTodo, selectDoing, selectDone, selectCanceled } from '../../redux/tasks/tasks.selector';
 
 import TodoList from '../todo-list';
 
 import { TodoSectionContainer } from './styled.todoSection';
 
 function TodoSection() {
-    const theme = useTheme();
+    const todo = useAppSelector(selectTodo);
+    const doing = useAppSelector(selectDoing);
+    const done = useAppSelector(selectDone);
+    const canceled = useAppSelector(selectCanceled);
 
     return (
         <TodoSectionContainer>
             <TodoList
-                id="TodoList1"
-                title="A fazer"
-                color={ theme.pallet.ui.green }
+                {...todo}
             />
             <TodoList
-                id="TodoList2"
-                title="Em andamento"
-                color={ theme.pallet.ui.orange }
+                {...doing}
             />
             <TodoList
-                id="TodoList3"
-                title="Concluído"
-                color={ theme.pallet.ui.primary }
+                {...done}
             />
             <TodoList
-                id="TodoList4"
-                title="Cancelado"
-                color={ theme.pallet.ui.red }
+                {...canceled}
             />
         </TodoSectionContainer>
     );

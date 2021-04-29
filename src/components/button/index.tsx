@@ -1,9 +1,15 @@
+import { HTMLProps } from 'react';
 import { ButtonProps } from './button.props';
 import {ButtonContainer} from './styled.button';
 
-function Button({ btnType = 'default', children }: ButtonProps) {
+function Button({ btnType = 'default', type = 'button', disabled, children, ...props }: ButtonProps) {
     return (
-        <ButtonContainer btnType={ btnType }>
+        <ButtonContainer
+            btnType={ btnType }
+            type={type}
+            disabled={disabled}
+            {...props}
+        >
             {children}
         </ButtonContainer>
     );

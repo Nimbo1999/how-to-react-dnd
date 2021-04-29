@@ -34,6 +34,7 @@ const TodoListHeader = styled.header<TodoListHeaderProps>`
 const TodoListContent = styled.div`
     flex: 1;
     display: flex;
+    flex-direction: column;
 
     padding: ${({theme}) => theme.spacing(2)} ${({theme}) => theme.spacing(1)};
 `;

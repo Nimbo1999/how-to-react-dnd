@@ -15,11 +15,6 @@ const SectionWrapper = styled.section`
 
     width: 100%;
     padding: ${({theme}) => theme.spacing(4)} ${({theme}) => theme.spacing(8)};
-
-    hr {
-        margin: ${({theme}) => theme.spacing(3)} 0px;
-        border-color: ${({theme}) => theme.pallet.ui.background};
-    }
 `;
 
 const SectinHeader = styled.header`
@@ -43,4 +38,25 @@ const HeaderExtra = styled.div`
     justify-content: flex-end;
 `;
 
-export { MainSectionContainer, SectinHeader, HeaderContent, HeaderExtra, SectionWrapper }
+const ModalContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
+
+const ModalFooter = styled.footer`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: ${({theme}) => theme.spacing(2)};
+`;
+
+const Form = styled.form`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+`;
+
+export {
+    MainSectionContainer, SectinHeader, HeaderContent, HeaderExtra, SectionWrapper, ModalContent,
+    ModalFooter, Form
+}
