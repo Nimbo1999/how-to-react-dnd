@@ -7,12 +7,21 @@ const TodoItemContainer = styled.div`
     height: fit-content;
     width: 100%;
     padding: ${({theme}) => theme.spacing(2)};
+    margin: ${({theme}) => theme.spacing(1)} 0px;
 
     background-color: ${({theme}) => theme.pallet.ui.white};
     border-radius: ${({theme}) => theme.spacing(.5)};
     border: 1px solid ${({theme}) => theme.pallet.ui.light};
 
     overflow: hidden;
+
+    &:first-child {
+        margin: 0px 0px ${({theme}) => theme.spacing(1)} 0px;
+    }
+
+    &:last-child {
+        margin: ${({theme}) => theme.spacing(1)} 0px 0px 0px;
+    }
 `;
 
 const TodoItemHeader = styled.header`

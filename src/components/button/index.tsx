@@ -1,4 +1,3 @@
-import { HTMLProps } from 'react';
 import { ButtonProps } from './button.props';
 import {ButtonContainer} from './styled.button';
 

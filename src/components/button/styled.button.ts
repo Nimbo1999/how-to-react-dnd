@@ -4,21 +4,21 @@ import { ButtonContainerProps } from './button.props';
 
 const buttonPrimaryType = css`
     background-color: ${({theme}) => theme.pallet.ui.primary};
-    color: ${({theme}) => theme.pallet.ui.background};
+    color: ${({theme}) => theme.pallet.ui.light};
 
     &:hover {
         background-color: ${({theme}) => theme.pallet.ui.primary};
-        color: ${({theme}) => theme.pallet.ui.background};
+        color: ${({theme}) => theme.pallet.ui.light};
     }
 `;
 
 const buttonDangerType = css`
     background-color: ${({theme}) => theme.pallet.ui.red};
-    color: ${({theme}) => theme.pallet.ui.background};
+    color: ${({theme}) => theme.pallet.ui.light};
 
     &:hover {
         background-color: ${({theme}) => theme.pallet.ui.red};
-        color: ${({theme}) => theme.pallet.ui.background};
+        color: ${({theme}) => theme.pallet.ui.light};
     }
 `;
 
