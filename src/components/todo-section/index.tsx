@@ -13,18 +13,13 @@ function TodoSection() {
 
     return (
         <TodoSectionContainer>
-            <TodoList
-                {...todo}
-            />
-            <TodoList
-                {...doing}
-            />
-            <TodoList
-                {...done}
-            />
-            <TodoList
-                {...canceled}
-            />
+            <TodoList {...todo} />
+
+            <TodoList {...doing} />
+
+            <TodoList {...done} />
+
+            <TodoList {...canceled} />
         </TodoSectionContainer>
     );
 }

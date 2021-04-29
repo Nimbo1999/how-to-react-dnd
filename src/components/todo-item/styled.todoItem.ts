@@ -14,6 +14,7 @@ const TodoItemContainer = styled.div<TodoItemContainerProps>`
     border-radius: ${({theme}) => theme.spacing(.5)};
     border: 1px solid ${({theme}) => theme.pallet.ui.light};
 
+    opacity: 1;
     overflow: hidden;
 
     &:first-child {

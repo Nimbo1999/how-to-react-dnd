@@ -14,7 +14,8 @@ function TodoItem({id, title, dateTime, description }: TodoItemProps) {
         type: itemTypes.TODO_ITEM,
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
-        })
+        }),
+        item: { id }
     }));
 
     return (

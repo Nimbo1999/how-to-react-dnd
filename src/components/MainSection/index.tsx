@@ -12,16 +12,17 @@ import { Heading, Paragraph, Text } from '../typografy';
 import Button from '../button';
 import TodoSection from '../todo-section';
 import { TodoItemProps } from '../todo-item/todoItem.props';
-
 import {
     MainSectionContainer, SectinHeader, HeaderContent, HeaderExtra, SectionWrapper,
     ModalContent, ModalFooter, Form
 } from './styled.mainSection';
 import Modal from '../modal';
 
+import makeid from '../../utils/randomString';
+
 const initialTaskState = {
-    id: new Date().toISOString(),
-    dateTime: new Date().toISOString(),
+    id: '',
+    dateTime: '',
     description: '',
     title: '',
 }
@@ -37,7 +38,11 @@ function MainSection() {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        dispatch(createTaskAction(newTask));
+        const brandNewTask = { ...newTask }
+        brandNewTask.id = makeid(4);
+        brandNewTask.dateTime = new Date().toISOString();
+
+        dispatch(createTaskAction(brandNewTask));
         setNewTask(initialTaskState);
         setIsOpen(false);
     }
