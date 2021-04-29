@@ -4,3 +4,7 @@ export interface TodoItemProps {
     dateTime: string,
     description: string,
 }
+
+export interface TodoItemContainerProps {
+    isDragging?: boolean;
+}

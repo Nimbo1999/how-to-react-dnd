@@ -1,4 +1,4 @@
 export const itemTypes = {
-    TODO_SECTION: 'TODO_SECTION',
-    TODO_ITEM: 'TODO_ITEM',
+    TODO_SECTION: 'todoSection',
+    TODO_ITEM: 'todoItem',
 }

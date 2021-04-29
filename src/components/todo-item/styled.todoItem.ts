@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { TodoItemContainerProps } from './todoItem.props';
 
-const TodoItemContainer = styled.div`
+const TodoItemContainer = styled.div<TodoItemContainerProps>`
     display: flex;
     flex-direction: column;
 
@@ -21,6 +22,10 @@ const TodoItemContainer = styled.div`
 
     &:last-child {
         margin: ${({theme}) => theme.spacing(1)} 0px 0px 0px;
+    }
+
+    &:hover {
+        cursor: grab;
     }
 `;
 
