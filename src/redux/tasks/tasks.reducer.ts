@@ -3,8 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TodoListProps } from '../../components/todo-list/todoList.props';
 import { theme } from '../../theme/theme';
 
-import { createTask, moveTask } from './tasks.actions';
-
+import { createTask, moveTaskFromList, moveTaskOrder } from './tasks.actions';
 
 export interface TodoListReducerState {
     todo: TodoListProps,
@@ -45,10 +44,11 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     createTaskAction: createTask,
-    moveTaskAction: moveTask,
+    moveTaskFromListAction: moveTaskFromList,
+    moveTastOrderAction: moveTaskOrder,
   },
 });
 
-export const { createTaskAction, moveTaskAction } = tasksSlice.actions;
+export const { createTaskAction, moveTaskFromListAction, moveTastOrderAction } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

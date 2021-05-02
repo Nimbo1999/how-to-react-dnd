@@ -9,3 +9,8 @@ export interface TodoItemProps {
 export interface TodoItemContainerProps {
     isDragging?: boolean;
 }
+
+export interface TodoItemDragItem {
+    id: string;
+    index: number;
+}

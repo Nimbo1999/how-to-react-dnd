@@ -1,7 +1,9 @@
 import { TodoItemProps } from '../todo-item/todoItem.props';
 
+export type taskValues = 'todo' | 'done' | 'doing' | 'canceled';
+
 export interface TodoListProps {
-    id: string;
+    id: taskValues;
     title: string;
     color: string;
     todos?: TodoItemProps[];

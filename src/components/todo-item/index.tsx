@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components';
 import Button from '../button';
 import { Text, Heading } from '../typografy';
 import { TodoItemContainer, TodoItemHeader, TodoItemContent, TodoItemFooter } from './styled.todoItem';
-import { TodoItemProps } from './todoItem.props';
+import { TodoItemProps, TodoItemDragItem } from './todoItem.props';
 
 import { itemTypes } from '../../drag-and-drop/drag.types';
 
@@ -18,14 +18,29 @@ function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
-        item: { id }
+        item: { id, index }
     }));
 
     const [, dropRef] = useDrop({
         accept: itemTypes.TODO_ITEM,
-        hover: (item, monitor) => {
-            console.log(item);
-            console.log(id);
+        hover: (item: TodoItemDragItem, monitor) => {
+            if (item.index === index) return;
+
+            // console.log(item.index, index);
+            const targetSize = ref.current?.getBoundingClientRect();
+            const draggedOffset = monitor.getClientOffset();
+
+            if (!targetSize || !draggedOffset) return;
+
+            const targetCenter = (targetSize.bottom - targetSize.top) / 2;
+
+            const draggedTop = draggedOffset.y - targetSize.top;
+
+            if (item.index < index! && draggedTop < targetCenter) return;
+
+            if (item.index > index! && draggedTop > targetCenter) return;
+
+            console.log('teste');
         },
     });
 

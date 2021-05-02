@@ -1,13 +1,17 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import { TodoListReducerState } from './tasks.reducer';
 
 import { TodoListProps } from '../../components/todo-list/todoList.props';
+import { TodoItemProps, TodoItemDragItem } from '../../components/todo-item/todoItem.props';
 
-interface ReduxAction {
-    payload: any,
-    type: string,
+import { taskValues } from '../../components/todo-list/todoList.props';
+
+interface MoveTaskFromListAction {
+    item: TodoItemDragItem;
+    taskId: taskValues;
 }
 
-const createTask = (state: TodoListReducerState, action: ReduxAction) => ({
+const createTask = (state: TodoListReducerState, action: PayloadAction<TodoItemProps>) => ({
     ...state,
     todo: {
         ...state.todo,
@@ -18,17 +22,18 @@ const createTask = (state: TodoListReducerState, action: ReduxAction) => ({
     }
 });
 
-const moveTask = (state: TodoListReducerState, action: ReduxAction) => {
-    type taskValues = 'todo' | 'done' | 'doing' | 'canceled';
+const moveTaskFromList = (state: TodoListReducerState, action: PayloadAction<MoveTaskFromListAction>) => {
 
-    const itemId = action.payload.itemId.id;
-    const taskName: taskValues = action.payload.taskId;
+    const itemId = action.payload.item.id;
+    const taskName = action.payload.taskId;
 
     for (const key in state) {
         const groupKey = key as taskValues;
         const taskGroup = state[groupKey] as TodoListProps;
 
         if (taskGroup.todos && taskGroup.todos.some(item => item.id === itemId)) {
+            if (groupKey === taskName) return state;
+            
             const taskId = taskGroup.todos.findIndex(task => task.id === itemId);
 
             const task = taskGroup.todos[taskId];
@@ -53,4 +58,8 @@ const moveTask = (state: TodoListReducerState, action: ReduxAction) => {
     return state;
 };
 
-export { createTask, moveTask }
+const moveTaskOrder = (state: TodoListReducerState, action: PayloadAction) => {
+    return state;
+}
+
+export { createTask, moveTaskFromList, moveTaskOrder }

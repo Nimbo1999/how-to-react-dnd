@@ -2,12 +2,13 @@ import { useTheme } from 'styled-components';
 import { useDrop } from 'react-dnd';
 
 import { useAppDispatch } from '../../redux/hooks';
-import { moveTaskAction } from '../../redux/tasks/tasks.reducer';
+import { moveTaskFromListAction } from '../../redux/tasks/tasks.reducer';
 
 import { Heading } from '../typografy';
 import TodoItem from '../todo-item';
 import { TodoListContainer, TodoListHeader, TodoListContent } from './styled.todoList';
 import { TodoListProps } from './todoList.props';
+import { TodoItemDragItem } from '../todo-item/todoItem.props';
 
 import { itemTypes } from '../../drag-and-drop/drag.types';
 
@@ -17,8 +18,10 @@ function TodoList({ id, title, color, todos = [] }: TodoListProps) {
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: itemTypes.TODO_ITEM,
-        drop: (item, monitor) => {
-            dispatch(moveTaskAction({ itemId: item, taskId: id }));
+        drop: (item: TodoItemDragItem, monitor) => {
+            dispatch(
+                moveTaskFromListAction({ item: item, taskId: id })
+            );
         },
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
