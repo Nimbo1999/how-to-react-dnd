@@ -3,6 +3,7 @@ export interface TodoItemProps {
     title: string,
     dateTime: string,
     description: string,
+    index?: number,
 }
 
 export interface TodoItemContainerProps {

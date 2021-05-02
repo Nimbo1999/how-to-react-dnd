@@ -1,5 +1,7 @@
 import { TodoListReducerState } from './tasks.reducer';
 
+import { TodoListProps } from '../../components/todo-list/todoList.props';
+
 interface ReduxAction {
     payload: any,
     type: string,
@@ -19,32 +21,36 @@ const createTask = (state: TodoListReducerState, action: ReduxAction) => ({
 const moveTask = (state: TodoListReducerState, action: ReduxAction) => {
     type taskValues = 'todo' | 'done' | 'doing' | 'canceled';
 
-    const itemId = action.payload.itemId;
+    const itemId = action.payload.itemId.id;
     const taskName: taskValues = action.payload.taskId;
 
-    if (state.todo.todos!.some(item => item.id === itemId)) {
-        const taskId = state.todo.todos!.findIndex(task => task.id === itemId);
+    for (const key in state) {
+        const groupKey = key as taskValues;
+        const taskGroup = state[groupKey] as TodoListProps;
 
-        const task = state.todo.todos![taskId];
+        if (taskGroup.todos && taskGroup.todos.some(item => item.id === itemId)) {
+            const taskId = taskGroup.todos.findIndex(task => task.id === itemId);
 
-        const newTodos = state.todo.todos!.filter(task => task.id !== itemId);
-        const otheList = [ ...state[taskName].todos!, task ];
+            const task = taskGroup.todos[taskId];
 
-        return {
-            ...state,
-            [taskName]: {
-                ...state[taskName],
-                todos: otheList
-            },
-            todo: {
-                ...state.todo,
-                todos: newTodos
+            const newTodos = taskGroup.todos!.filter(task => task.id !== itemId);
+            const otheList = [ ...state[taskName].todos!, task ];
+
+            return {
+                ...state,
+                [taskName]: {
+                    ...state[taskName],
+                    todos: otheList
+                },
+                [key]: {
+                    ...state[groupKey],
+                    todos: newTodos
+                }
             }
         }
     }
-    // taskName it's with wrong value. need to be the target list id!
 
-    return state
+    return state;
 };
 
 export { createTask, moveTask }

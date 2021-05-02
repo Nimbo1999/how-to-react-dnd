@@ -1,4 +1,5 @@
-import { useDrag } from 'react-dnd';
+import { useRef } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 import { useTheme } from 'styled-components';
 
 import Button from '../button';
@@ -8,9 +9,11 @@ import { TodoItemProps } from './todoItem.props';
 
 import { itemTypes } from '../../drag-and-drop/drag.types';
 
-function TodoItem({id, title, dateTime, description }: TodoItemProps) {
+function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
+    const ref = useRef<HTMLDivElement>(null);
     const theme = useTheme();
-    const [{ isDragging }, drag] = useDrag(() => ({
+
+    const [{ isDragging }, dragRef] = useDrag(() => ({
         type: itemTypes.TODO_ITEM,
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
@@ -18,8 +21,18 @@ function TodoItem({id, title, dateTime, description }: TodoItemProps) {
         item: { id }
     }));
 
+    const [, dropRef] = useDrop({
+        accept: itemTypes.TODO_ITEM,
+        hover: (item, monitor) => {
+            console.log(item);
+            console.log(id);
+        },
+    });
+
+    dragRef(dropRef(ref));
+
     return (
-        <TodoItemContainer id={ `todo-item-${id}` } ref={drag} isDragging={isDragging}>
+        <TodoItemContainer id={ `todo-item-${id}` } ref={ref} isDragging={isDragging}>
             <TodoItemHeader>
                 <Heading>{title}</Heading>
                 <Text color={theme.pallet.text.hint}>{new Date(dateTime).toLocaleDateString('pt-BR')}</Text>

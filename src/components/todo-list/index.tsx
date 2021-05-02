@@ -17,7 +17,9 @@ function TodoList({ id, title, color, todos = [] }: TodoListProps) {
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: itemTypes.TODO_ITEM,
-        drop: (_, monitor) => dispatch(moveTaskAction({ itemId: monitor.getItem(), taskId: id })),
+        drop: (item, monitor) => {
+            dispatch(moveTaskAction({ itemId: item, taskId: id }));
+        },
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
@@ -30,15 +32,16 @@ function TodoList({ id, title, color, todos = [] }: TodoListProps) {
             </TodoListHeader>
 
             <TodoListContent ref={drop}>
-                {todos.map(todo => (
+                {todos.map((todo, index) => (
                     <TodoItem
                         key={todo.dateTime}
                         {...todo}
-                    />    
+                        index={index}
+                    />
                 ))}
                 {isOver && (
                     <div
-                        style={{ background: 'red', flex: 1, width: '100%' }}
+                        style={{ background: theme.pallet.ui.red, flex: 1, width: '100%', cursor: 'default' }}
                     />
                 )}
             </TodoListContent>

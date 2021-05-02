@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { TodoItemContainerProps } from './todoItem.props';
 
 const TodoItemContainer = styled.div<TodoItemContainerProps>`
@@ -13,9 +13,12 @@ const TodoItemContainer = styled.div<TodoItemContainerProps>`
     background-color: ${({theme}) => theme.pallet.ui.white};
     border-radius: ${({theme}) => theme.spacing(.5)};
     border: 1px solid ${({theme}) => theme.pallet.ui.light};
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 
     opacity: 1;
     overflow: hidden;
+
+    cursor: grab;
 
     &:first-child {
         margin: 0px 0px ${({theme}) => theme.spacing(1)} 0px;
@@ -25,9 +28,16 @@ const TodoItemContainer = styled.div<TodoItemContainerProps>`
         margin: ${({theme}) => theme.spacing(1)} 0px 0px 0px;
     }
 
-    &:hover {
-        cursor: grab;
-    }
+    ${({isDragging}) => isDragging && css`
+        border: 2px dashed rgba(0, 0, 0, 0.2);
+        background: transparent;
+        box-shadow: none;
+        cursor: grabbing;
+
+        & ${TodoItemHeader}, ${TodoItemContent}, ${TodoItemFooter} {
+            opacity: 0;
+        }
+    `}
 `;
 
 const TodoItemHeader = styled.header`

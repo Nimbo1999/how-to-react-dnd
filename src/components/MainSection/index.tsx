@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTheme } from 'styled-components';
+import { MdAddCircle } from 'react-icons/md';
 
 import { createTaskAction } from '../../redux/tasks/tasks.reducer';
 
@@ -25,6 +26,7 @@ const initialTaskState = {
     dateTime: '',
     description: '',
     title: '',
+    index: undefined,
 }
 
 function MainSection() {
@@ -76,6 +78,11 @@ function MainSection() {
                             setIsOpen(true);
                         }}>
                             Cadastrar tarefa
+                            <MdAddCircle
+                                size={16}
+                                color={theme.pallet.ui.white}
+                                style={{ marginLeft: theme.spacing(1) }}
+                            />
                         </Button>
                     </HeaderExtra>
                 </SectinHeader>
