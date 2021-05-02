@@ -2,6 +2,9 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useTheme } from 'styled-components';
 
+import { useAppDispatch } from '../../redux/hooks';
+import { moveTastOrderAction } from '../../redux/tasks/tasks.reducer';
+
 import Button from '../button';
 import { Text, Heading } from '../typografy';
 import { TodoItemContainer, TodoItemHeader, TodoItemContent, TodoItemFooter } from './styled.todoItem';
@@ -12,6 +15,8 @@ import { itemTypes } from '../../drag-and-drop/drag.types';
 function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
     const ref = useRef<HTMLDivElement>(null);
     const theme = useTheme();
+
+    const dispatch = useAppDispatch();
 
     const [{ isDragging }, dragRef] = useDrag(() => ({
         type: itemTypes.TODO_ITEM,
@@ -40,7 +45,9 @@ function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
 
             if (item.index > index! && draggedTop > targetCenter) return;
 
-            console.log('teste');
+            dispatch(
+                moveTastOrderAction({from: item.index, to: index!})
+            );
         },
     });
 

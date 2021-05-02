@@ -5,11 +5,7 @@ import { TodoListProps } from '../../components/todo-list/todoList.props';
 import { TodoItemProps, TodoItemDragItem } from '../../components/todo-item/todoItem.props';
 
 import { taskValues } from '../../components/todo-list/todoList.props';
-
-interface MoveTaskFromListAction {
-    item: TodoItemDragItem;
-    taskId: taskValues;
-}
+import { MoveTaskFromListAction, MoveTaskOrderAction } from './tasks.interfaces';
 
 const createTask = (state: TodoListReducerState, action: PayloadAction<TodoItemProps>) => ({
     ...state,
@@ -58,7 +54,10 @@ const moveTaskFromList = (state: TodoListReducerState, action: PayloadAction<Mov
     return state;
 };
 
-const moveTaskOrder = (state: TodoListReducerState, action: PayloadAction) => {
+const moveTaskOrder = (state: TodoListReducerState, action: PayloadAction<MoveTaskOrderAction>) => {
+    const { payload } = action;
+    const { from, to } = payload;
+    console.log({ from, to });
     return state;
 }
 
