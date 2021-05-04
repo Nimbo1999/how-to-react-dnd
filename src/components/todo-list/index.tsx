@@ -19,9 +19,11 @@ function TodoList({ id, title, color, todos = [] }: TodoListProps) {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: itemTypes.TODO_ITEM,
         drop: (item: TodoItemDragItem, monitor) => {
-            dispatch(
-                moveTaskFromListAction({ item: item, taskId: id })
-            );
+            if (item.taskListId !== id) {
+                dispatch(
+                    moveTaskFromListAction({ item: item, taskId: id })
+                );
+            }
         },
         collect: (monitor) => ({
             isOver: !!monitor.isOver()

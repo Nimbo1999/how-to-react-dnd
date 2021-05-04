@@ -56,9 +56,12 @@ const moveTaskFromList = (state: TodoListReducerState, action: PayloadAction<Mov
 
 const moveTaskOrder = (state: TodoListReducerState, action: PayloadAction<MoveTaskOrderAction>) => {
     const { payload } = action;
-    const { from, to } = payload;
-    console.log({ from, to });
-    return state;
+    const { from, to, taskListId } = payload;
+
+    const draggedItem = state[taskListId].todos![from];
+
+    state[taskListId].todos!.splice(from, 1);
+    state[taskListId].todos!.splice(to, 0, draggedItem);
 }
 
 export { createTask, moveTaskFromList, moveTaskOrder }

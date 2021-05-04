@@ -13,4 +13,5 @@ export interface TodoItemContainerProps {
 export interface TodoItemDragItem {
     id: string;
     index: number;
+    taskListId: string;
 }

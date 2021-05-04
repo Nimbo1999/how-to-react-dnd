@@ -9,4 +9,5 @@ export interface MoveTaskFromListAction {
 export interface MoveTaskOrderAction {
     from: number;
     to: number;
+    taskListId: taskValues;
 }

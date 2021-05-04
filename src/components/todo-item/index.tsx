@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useTheme } from 'styled-components';
 
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { moveTastOrderAction } from '../../redux/tasks/tasks.reducer';
+import { selectListHolder } from '../../redux/tasks/tasks.selector';
 
 import Button from '../button';
 import { Text, Heading } from '../typografy';
@@ -18,24 +19,27 @@ function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
 
     const dispatch = useAppDispatch();
 
+    const taskListId = useAppSelector(
+        state => selectListHolder({ id, title, index, dateTime, description })(state)
+    );
+
     const [{ isDragging }, dragRef] = useDrag(() => ({
         type: itemTypes.TODO_ITEM,
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
-        item: { id, index }
+        item: { id, index, taskListId }
     }));
 
     const [, dropRef] = useDrop({
         accept: itemTypes.TODO_ITEM,
         hover: (item: TodoItemDragItem, monitor) => {
-            if (item.index === index) return;
+            if (item.index === index && item.taskListId === taskListId) return;
 
-            // console.log(item.index, index);
             const targetSize = ref.current?.getBoundingClientRect();
             const draggedOffset = monitor.getClientOffset();
 
-            if (!targetSize || !draggedOffset) return;
+            if (!targetSize || !draggedOffset || !item.taskListId) return;
 
             const targetCenter = (targetSize.bottom - targetSize.top) / 2;
 
@@ -45,9 +49,14 @@ function TodoItem({id, title, dateTime, description, index }: TodoItemProps) {
 
             if (item.index > index! && draggedTop > targetCenter) return;
 
-            dispatch(
-                moveTastOrderAction({from: item.index, to: index!})
-            );
+            if (item.taskListId === taskListId) {
+                dispatch(
+                    moveTastOrderAction({from: item.index, to: index!, taskListId})
+                );
+
+                item.index = index!;
+            }
+
         },
     });
 
